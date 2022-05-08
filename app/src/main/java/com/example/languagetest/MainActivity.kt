@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.languagetest.databinding.ActivityMainBinding
-import com.example.whelp.Launcher
 import com.example.whelp.WhelpLauncherActivity
 
 class MainActivity : AppCompatActivity() {
