@@ -1,14 +1,30 @@
 package com.example.whelp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class WhelpLauncherActivity : AppCompatActivity() {
+    @Inject
+    lateinit var preferences: Preferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_whelp_launcher)
 
-        Toast.makeText(this, "This is 1.1 version", Toast.LENGTH_LONG).show()
+        var version = preferences.getFromPrefs("version", 1) as Int
+
+        val textView: TextView = findViewById(R.id.textView)
+
+        textView.text = "version $version"
+
+        preferences.saveToPrefs("version", ++version)
+
+        Toast.makeText(this, "This is 1.2 version", Toast.LENGTH_LONG).show()
+
     }
 }
