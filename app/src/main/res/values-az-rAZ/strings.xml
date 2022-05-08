@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LanguageTest</string>
+    <string name="title_home">Ev</string>
+    <string name="title_dashboard">Dashboard Azerbaycance</string>
+    <string name="title_notifications">Bildirisler</string>
+</resources>
