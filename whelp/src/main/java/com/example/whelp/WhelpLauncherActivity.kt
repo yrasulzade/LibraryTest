@@ -19,12 +19,17 @@ class WhelpLauncherActivity : AppCompatActivity() {
         var version = preferences.getFromPrefs("version", 1) as Int
 
         val textView: TextView = findViewById(R.id.textView)
+        val intentTextView: TextView = findViewById(R.id.key)
 
         textView.text = "version $version"
 
         preferences.saveToPrefs("version", ++version)
 
         Toast.makeText(this, "This is 1.2 version", Toast.LENGTH_LONG).show()
+
+        val key = intent.extras?.get("key")
+        intentTextView.text = key.toString()
+
 
     }
 }
