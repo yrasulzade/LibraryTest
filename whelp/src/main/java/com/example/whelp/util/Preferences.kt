@@ -1,4 +1,4 @@
-package com.example.whelp
+package com.example.whelp.util
 
 import android.content.SharedPreferences
 import javax.inject.Inject

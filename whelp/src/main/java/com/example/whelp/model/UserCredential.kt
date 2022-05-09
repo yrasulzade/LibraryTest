@@ -1,4 +1,4 @@
-package com.example.whelp
+package com.example.whelp.model
 
 data class UserCredentials(val language: String, val contract: Contract)
 

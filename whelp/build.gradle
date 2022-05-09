@@ -12,7 +12,7 @@ android {
     defaultConfig {
         minSdk 23
         targetSdk 32
-
+        multiDexEnabled = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -30,9 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-//    dataBinding{
-//        enabled true
-//    }
+
+    buildFeatures {
+        dataBinding = true
+    }
 
     buildFeatures {
         viewBinding true
@@ -55,6 +56,28 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.38.1"
 
     implementation "androidx.security:security-crypto:1.1.0-alpha03"
+
+    //Network
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$logging_interceptor_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$moshi_version"
+
+//Hilt
+    implementation 'com.google.dagger:hilt-android:2.41'
+    kapt 'com.google.dagger:hilt-compiler:2.41'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
+    implementation 'com.karumi:dexter:6.2.2'
+    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha03'
+
+//log
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+//apachi
+    implementation 'commons-codec:commons-codec:1.15'
+
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 afterEvaluate {
