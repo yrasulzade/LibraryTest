@@ -13,10 +13,13 @@ import android.view.View
 import android.webkit.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.whelp.databinding.ActivitySkyTechBinding
 import com.example.whelp.model.UserCredentials
 import com.example.whelp.util.CredentialHelper
+import com.example.whelp.util.HASH_ID
 import com.example.whelp.util.Preferences
+import com.example.whelp.util.X_APP_ID
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -37,6 +40,8 @@ class SkyTechActivity : AppCompatActivity() {
         binding = ActivitySkyTechBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val viewModel = ViewModelProvider(this)[SkyTechViewModel::class.java]
+
         binding.apply {
             whelpWebView.isVerticalScrollBarEnabled = true
             whelpWebView.isHorizontalScrollBarEnabled = true
@@ -47,6 +52,7 @@ class SkyTechActivity : AppCompatActivity() {
 
         val settings: WebSettings = binding.whelpWebView.settings
         settings.domStorageEnabled = true
+        settings.javaScriptEnabled = true
 
         if (!isOnline()) {
             showMessage(getString(R.string.no_internet))
@@ -55,7 +61,10 @@ class SkyTechActivity : AppCompatActivity() {
             return
         }
 
-        if (isOnline()) loadWebView("https://widget-api.getwhelp.com/sdk/chat?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJl[…]waWQiOiIwIn19.2vUs3No1PLrUi9tWyT3wXdBNZVhkKPvyaVeuYkDUtmU")
+
+        viewModel.url.observe(this) {
+            if (isOnline()) loadWebView(it)
+        }
 
 
         CredentialHelper.credential.observe(this) {
@@ -69,7 +78,12 @@ class SkyTechActivity : AppCompatActivity() {
 
             val json = jsonAdapter.toJson(it.userCredentials)
 
-            hmacWithApacheCommons("HmacSHA256", json.toString(), "${it.api_key}${it.app_id}")
+            val hashValue =
+                hmacWithApacheCommons("HmacSHA256", json.toString(), "${it.api_key}${it.app_id}")
+            preferences.saveToPrefs(HASH_ID, hashValue as String)
+            preferences.saveToPrefs(X_APP_ID, it.app_id as String)
+
+            viewModel.getUrl(it.userCredentials!!)
         }
     }
 
@@ -153,11 +167,12 @@ class SkyTechActivity : AppCompatActivity() {
     private fun showToast(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
-    private fun hideLoading(){
+
+    private fun hideLoading() {
         binding.progressBar.visibility = View.GONE
     }
 
-    private fun showLoading(){
+    private fun showLoading() {
         binding.progressBar.visibility = View.VISIBLE
     }
 

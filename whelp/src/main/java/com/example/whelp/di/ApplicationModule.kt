@@ -27,9 +27,9 @@ class ApplicationModule {
 
     @Provides
     fun provideBaseUrl() = if (BuildConfig.DEBUG) {
-        "https://widget.dev-whelp.com/sdk/auth"
+        "https://widget-api.getwhelp.com/sdk/"
     } else {
-        "https://widget-api.kapitalbank.az/sdk/auth"
+        "https://widget-api.kapitalbank.az/sdk/auth/"
     }
 
 

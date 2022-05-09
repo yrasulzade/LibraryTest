@@ -55,5 +55,6 @@ ext {
     barcode_scanning_version = "17.0.0"
     paging_version = "3.0.0-alpha04"
     nav_version = "2.3.5"
-
+    coroutines_core = "1.5.2"
+    coroutines_android = "1.6.0"
 }

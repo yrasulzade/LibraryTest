@@ -3,7 +3,7 @@ package com.example.languagetest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.languagetest.databinding.ActivityMainBinding
-import com.example.whelp.model.Contract
+import com.example.whelp.model.Contact
 import com.example.whelp.model.SkyTech
 import com.example.whelp.model.UserCredentials
 
@@ -18,13 +18,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val test =
-            UserCredentials("az", Contract("test@box.az", "Rasul Mammadov",
-                "994708306405", "", ""))
+            UserCredentials("en", Contact("enrike@whelp-test.co", "Enrike Nur",
+                "+994703852755"))
 
         binding.button.setOnClickListener {
             SkyTech.Builder()
-                .key("yunis")
-                .appID("app_id")
+                .key("rPyCMWFMk27ucwYPpZE6")
+                .appID("f4ee05e97792cf5a5f249c8af2fc8068")
                 .userCredentials(test)
                 .open(this)
         }
