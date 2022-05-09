@@ -16,5 +16,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "LanguageTest"
 include ':app'
-include ':mylibrary'
 include ':whelp'

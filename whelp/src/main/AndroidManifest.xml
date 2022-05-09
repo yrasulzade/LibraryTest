@@ -5,7 +5,7 @@
     <application
         android:name=".App">
         <activity
-            android:name=".WhelpLauncherActivity"
+            android:name=".SkyTechActivity"
             android:exported="false" />
     </application>
 
