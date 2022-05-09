@@ -25,10 +25,12 @@ class WhelpLauncherActivity : AppCompatActivity() {
 
         preferences.saveToPrefs("version", ++version)
 
-        Toast.makeText(this, "This is 1.2 version", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "This is 1.6 version", Toast.LENGTH_LONG).show()
 
         val key = intent.extras?.get("key")
         intentTextView.text = key.toString()
+
+
 
 
     }
